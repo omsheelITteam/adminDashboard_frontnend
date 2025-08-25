@@ -146,11 +146,11 @@ const Writers = () => {
   const navigate = useNavigate();
   const [writers, setWriters] = useState([]);
   const [allWriters, setAllWriters] = useState([]);
-
+const {backendURL}=useContext(AppContext)
   const get_writers = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5500/api/admin/get-all-writers",
+        `${backendURL}/api/admin/get-all-writers`,
         { withCredentials: true }
       );
       setWriters(data.writers);

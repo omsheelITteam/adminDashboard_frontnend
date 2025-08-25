@@ -597,15 +597,16 @@
 
 // export default DailyPulse;
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { X, Upload, Camera } from "lucide-react";
 import axios from "axios";
+import { AppContext } from "../Context/AppContext";
 const DailyPulse = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
-
+const {backendURL}=useContext(AppContext)
   const handleFileChange = (e) => {
     const newFiles = Array.from(e.target.files);
     
@@ -673,7 +674,7 @@ const DailyPulse = () => {
       
       // Your actual API call:
       const res = await axios.post(
-        "http://localhost:5500/api/admin/upload-daily-pulse",
+        `${backendURL}/api/admin/upload-daily-pulse`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

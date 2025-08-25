@@ -328,7 +328,7 @@ const AdminProfile = () => {
 
   const fetchAdminProfile = async () => {
     try {
-      const res = await axios.get(`http://localhost:5500/api/admin/get-admin-profile`, {
+      const res = await axios.get(`${backendURL}/api/admin/get-admin-profile`, {
         withCredentials: true,
       });
       if (res.data.success) {

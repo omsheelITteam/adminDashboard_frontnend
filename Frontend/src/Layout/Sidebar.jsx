@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import news from "../assets/News.png";
 import { AiFillDashboard, AiOutlineMenu } from "react-icons/ai";
@@ -13,12 +13,13 @@ import { FaUsers } from "react-icons/fa";
 
 import axios from 'axios';
 import toast from "react-hot-toast";
+import { AppContext } from '../Context/AppContext';
 
 const AdminSidebar = () => {
   const { pathname, search } = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
-
+  const {backendURL}=useContext(AppContext)
   // Check if this is a shared view
   const urlParams = new URLSearchParams(search);
   const isSharedView = urlParams.get('shared') === 'true';
@@ -29,7 +30,7 @@ const AdminSidebar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:5500/api/admin/logout-admin", {}, { withCredentials: true });
+      await axios.post(`${backendURL}/api/admin/logout-admin`, {}, { withCredentials: true });
       toast.success("Logged out successfully");
       // localStorage.removeItem("newToken");
       setSidebarOpen(false);

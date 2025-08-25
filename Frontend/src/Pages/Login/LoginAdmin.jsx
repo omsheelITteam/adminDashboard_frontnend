@@ -292,7 +292,7 @@ import { useNavigate } from "react-router-dom";
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginAdmin = () => {
-  const { backendUrl } = useContext(AppContext);
+  const { backendURL } = useContext(AppContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -333,7 +333,7 @@ const LoginAdmin = () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `${backendUrl}/api/admin/login-admin`,
+        `${backendURL}/api/admin/login-admin`,
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );

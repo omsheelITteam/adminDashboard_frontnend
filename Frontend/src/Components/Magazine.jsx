@@ -5,7 +5,7 @@ import axios from "axios";
 import {AppContext} from "../Context/AppContext";
 import { toast } from "react-toastify";
 const MagazineUpload = () => {
-  const { userData } = useContext(AppContext);
+  const { userData ,backendURL} = useContext(AppContext);
   const [type, setType] = useState("file");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -26,7 +26,7 @@ const MagazineUpload = () => {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:5500/api/admin/upload-magazine", formData, {
+      await axios.post(`${backendURL}/api/admin/upload-magazine`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
