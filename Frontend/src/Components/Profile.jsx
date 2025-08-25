@@ -1,170 +1,3 @@
-// import React, { useEffect, useState, useContext, useRef } from "react";
-// import { useParams, useNavigate, useLocation, useSearchParams } from "react-router-dom";
-// import axios from "axios";
-// import StoreContext from "../Context/StoreContext";
-
-// import img1 from "../assets/profileDefault.png";
-// import SharesButton from "./ShareButton";
-
-// import { Toast } from "primereact/toast";
-
-// const Profile = () => {
-//   const { id } = useParams();
-//   const { pathname } = useLocation();
-//   const [searchParams] = useSearchParams();
-//   const navigate = useNavigate();
-//   const { store } = useContext(StoreContext);
-
-//   const [writer, setWriter] = useState(null);
-//   const [counts, setCounts] = useState({
-//     total: 0,
-//     pending: 0,
-//     active: 0,
-//     deactive: 0,
-//     writer: 0,
-//     magazines: 0,
-//   });
-
-//   const toast = useRef(null);
-
-//   const isSharedView = searchParams.get('shared') === 'true';
-
-//   const fetchWriter = async () => {
-//     try {
-//       const userId = id || store?.userInfo?.id;
-//       if (!userId) return;
-
-//       const res = await axios.get(`http://localhost:5500/api/news/writers/${userId}`, {
-//         headers: { Authorization: `Bearer ${store.token}` },
-//       });
-
-//       setWriter(res.data.writer);
-//     } catch (error) {
-//       console.error("Profile fetch failed", error);
-//     }
-//   };
-
-//   const fetchAdminCounts = async () => {
-//     try {
-//       const { data } = await axios.get(`http://localhost:5000/api/news`, {
-//         headers: { Authorization: `Bearer ${store.token}` },
-//       });
-
-//       setCounts({
-//         total: data.news.length,
-//         active: data.news.filter((n) => n.status === "active").length,
-//         pending: data.news.filter((n) => n.status === "pending").length,
-//         deactive: data.news.filter((n) => n.status === "deactive").length,
-//         writer: data.news.filter((n) => n.createdByRole === "writer").length,
-//         magazines: 0,
-//       });
-//     } catch (error) {
-//       console.error("Failed to fetch admin stats", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchWriter();
-//     if (store.userInfo?.role === "admin" && !isSharedView) {
-//       fetchAdminCounts();
-//     }
-//   }, [id, store.userInfo, isSharedView]);
-
-//   if (!writer) return <p className="p-4">Loading profile...</p>;
-
-//   const isCurrentUser = !id || id === store?.userInfo?.id;
-//   const isAdmin = store.userInfo?.role === "admin";
-
-//   const moveToMagazineData = () => {
-//     navigate("/dashboard/magazineTable");
-//   };
-
-//   return (
-//     <div className={`${isSharedView ? 'min-h-screen bg-gray-50 p-4' : ''}`}>
-//       <div className={`${isSharedView ? 'max-w-2xl mx-auto' : 'max-w-4xl mx-auto mt-10'} bg-white p-6 rounded-lg shadow-md`}>
-//         <Toast ref={toast} position="top-center" />
-
-//         {isSharedView && (
-//           <div className="text-center mb-8">
-//             <h1 className="text-3xl font-bold text-gray-800">Profile</h1>
-//             <div className="w-20 h-1 bg-blue-600 mx-auto mt-2"></div>
-//           </div>
-//         )}
-
-//         {/* Profile Info */}
-//         <div className="flex flex-col sm:flex-row items-center gap-6 border-b pb-6">
-//           <img
-//             src={writer.image ? `http://localhost:5000/uploads/${writer.image}` : img1}
-//             alt="Profile"
-//             className="w-28 h-28 rounded-full object-cover"
-//           />
-//           <div className="text-center sm:text-left">
-//             <p className="text-lg"><strong>Name:</strong> {writer.name}</p>
-//             <p className="text-lg"><strong>Email:</strong> {writer.email}</p>
-//             <p className="text-lg"><strong>Category:</strong> {writer.category}</p>
-//             <p className="text-lg"><strong>Role:</strong> {writer.role}</p>
-//             <div className="mt-4 flex flex-row gap-3">
-//               {isCurrentUser && !isSharedView && (
-//                 <button
-//                   onClick={() => navigate("/dashboard/profile/update")}
-//                   className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-//                 >
-//                   Update Profile
-//                 </button>
-//               )}
-//               {isAdmin && !isSharedView && (
-//                 <SharesButton
-//                   text={`Check out ${writer.name}'s profile!`}
-//                   url={`${window.location.origin}${window.location.pathname}?shared=true`}
-//                 />
-//               )}
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Admin Stats */}
-//         {isAdmin && isCurrentUser && !isSharedView && (
-//           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8 text-center rounded p-4">
-//             <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white shadow-lg">
-//               <span className="text-xl font-bold">{counts.total}</span>
-//               <span className="text-md">Total News</span>
-//             </div>
-//             <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white shadow-lg">
-//               <span className="text-xl font-bold">{counts.pending}</span>
-//               <span className="text-md">Pending News</span>
-//             </div>
-//             <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white shadow-lg">
-//               <span className="text-xl font-bold">{counts.active}</span>
-//               <span className="text-md">Active News</span>
-//             </div>
-//             <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white shadow-lg">
-//               <span className="text-xl font-bold">{counts.deactive}</span>
-//               <span className="text-md">Deactive News</span>
-//             </div>
-//             <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white shadow-lg">
-//               <span className="text-xl font-bold">{counts.writer}</span>
-//               <span className="text-md">No. of Writers</span>
-//             </div>
-//             <button
-//               onClick={moveToMagazineData}
-//               className={`w-full p-6 flex flex-col items-center justify-center rounded-md bg-white shadow-lg ${
-//                 pathname === "/dashboard/magazineTable" ? "bg-gray-100 font-semibold" : ""
-//               }`}
-//             >
-//               <span className="text-md">{counts.magazines}</span>
-//               <span className="text-md">Total Magazines</span>
-//             </button>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Profile;
-
-
-
 
 
 // import React, { useEffect, useState } from "react";
@@ -341,7 +174,7 @@ const AdminProfile = () => {
             // deactive: 0,
           },
         });
-        console.log("Admin stats:", res.data.adminData.stats);
+        // console.log("Admin stats:", res.data.adminData.stats);
       }
     } catch (error) {
       console.error("Error fetching admin profile", error);
@@ -365,7 +198,7 @@ const getAllNews = async () => {
         pending: data.news.filter((n) => n.status.toLowerCase() === "pending").length,
         approved: data.news.filter((n) => n.status.toLowerCase() === "approved").length,
         rejected: data.news.filter((n) => n.status.toLowerCase() === "rejected").length,
-        writer: data.news.filter((n) => n.createdByRole === "writer").length,
+        writer: data.news.filter((n) => n.createdByRole === n.role).length,
      
       
       });
@@ -439,12 +272,12 @@ const getAllNews = async () => {
           <div className="flex flex-col items-center bg-gray-50 p-4 rounded shadow">
             <IoNewspaperOutline className="text-blue-500 text-4xl" />
             <p className="text-xl font-bold">{counts.total || 0}</p>
-            <p className="text-sm text-gray-600">Total Blogs</p>
+            <p className="text-sm text-gray-600">Blogs</p>
           </div>
           <div className="flex flex-col items-center bg-gray-50 p-4 rounded shadow">
             <img src={img2} className="w-10 h-10" alt="Check" />
             <p className="text-xl font-bold">{counts.approved || 0}</p>
-            <p className="text-sm text-gray-600">Published</p>
+            <p className="text-sm text-gray-600">Approved</p>
           </div>
           <div className="flex flex-col items-center bg-gray-50 p-4 rounded shadow">
             <FontAwesomeIcon icon={faHourglassHalf} className="text-purple-600 text-3xl" />
@@ -454,7 +287,7 @@ const getAllNews = async () => {
           <div className="flex flex-col items-center bg-gray-50 p-4 rounded shadow">
             <span className="text-3xl">❌</span>
             <p className="text-xl font-bold">{counts.rejected || 0}</p>
-            <p className="text-sm text-gray-600">Inactive</p>
+            <p className="text-sm text-gray-600">Rejected</p>
           </div>
         </div>
    

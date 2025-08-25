@@ -293,12 +293,12 @@ const WriterProfile = () => {
         <div className="flex flex-col items-center bg-gray-50 p-4 rounded shadow">
           <IoNewspaperOutline className="text-blue-500 text-4xl" />
           <p className="text-xl font-bold">{news.length}</p>
-          <p className="text-sm text-gray-600">Total Blogs</p>
+          <p className="text-sm text-gray-600">Blogs</p>
         </div>
         <div className="flex flex-col items-center bg-gray-50 p-4 rounded shadow">
           <img src={img2} className="w-10 h-10" alt="Check" />
           <p className="text-xl font-bold">{statusCounts.approved}</p>
-          <p className="text-sm text-gray-600">Published</p>
+          <p className="text-sm text-gray-600">Approved</p>
         </div>
         <div className="flex flex-col items-center bg-gray-50 p-4 rounded shadow">
           <FontAwesomeIcon icon={faHourglassHalf} className="text-purple-600 text-3xl" />

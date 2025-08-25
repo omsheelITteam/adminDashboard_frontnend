@@ -85,7 +85,7 @@ const AdminSidebar = () => {
           <li>
             <Link to='/dashboard/writers' className={navItemClass('/dashboard/writers')} onClick={() => setSidebarOpen(false)}>
               <FaUsers className='text-xl' />
-              <span>Writers</span>
+              <span>Contributors</span>
             </Link>
           </li>
 

@@ -61,7 +61,7 @@ const SettingPage = () => {
         { withCredentials: true } 
       );
 
-      console.log("Response:", res.data);
+      // console.log("Response:", res.data);
 
       if (res.data.success) {
         toast.success("Password changed successfully", { position: "top-center" });

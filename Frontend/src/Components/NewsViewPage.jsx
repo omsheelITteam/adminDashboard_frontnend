@@ -429,6 +429,8 @@ import SharesButton from "./ShareButton";
 import { AppContext } from "../Context/AppContext";
 import Admindashboard from "../Pages/AdminDashboard/AdminDashboard";
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { Toast } from "primereact/toast";
+import toast from "react-hot-toast";
 
 const NewsViewPage = () => {
   const { userData, role, backendURL } = useContext(AppContext);
@@ -500,13 +502,13 @@ const NewsViewPage = () => {
       
       if (data.success) {
         setNews(prev => ({ ...prev, status }));
-        alert(`News ${status.toLowerCase()} successfully!`);
+        toast.success(`News ${status.toLowerCase()} successfully!`);
       } else {
-        alert("Failed to update status");
+        toast.error("Failed to update status");
       }
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Error updating status");
+      toast.message("Error updating status");
     } finally {
       setLoading(false);
     }

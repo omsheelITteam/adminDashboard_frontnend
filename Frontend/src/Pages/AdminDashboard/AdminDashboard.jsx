@@ -469,23 +469,23 @@ const Admindashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
         <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white text-black">
           <span className="text-xl font-bold">{counts.total}</span>
-          <span className="text-md">Total News</span>
+          <span className="text-md">Blogs</span>
         </div>
         <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white text-black">
           <span className="text-xl font-bold">{counts.pending}</span>
-          <span className="text-md">Pending News</span>
+          <span className="text-md">Pending Blogs</span>
         </div>
         <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white text-black">
           <span className="text-xl font-bold">{counts.approved}</span>
-          <span className="text-md">Approved News</span>
+          <span className="text-md">Approved Blogs</span>
         </div>
         <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white text-black">
           <span className="text-xl font-bold">{counts.rejected}</span>
-          <span className="text-md">Rejected News</span>
+          <span className="text-md">Rejected Blogs</span>
         </div>
         <div className="w-full p-6 flex flex-col items-center justify-center rounded-md bg-white text-black">
           <span className="text-xl font-bold">{counts.writer}</span>
-          <span className="text-md">Writers</span>
+          <span className="text-md">Contributors</span>
         </div>
         <button
           onClick={() => navigate("/dashboard/magazineTable")}
@@ -541,7 +541,7 @@ const Admindashboard = () => {
                         <img className="w-[40px] h-[40px]" src={n.imageUrl} alt="news" />
                       </td>
                       <td className="px-6 p-4">{n.title.slice(0, 15)}</td>
-                      <td className="px-6 p-4">{n.writerName}</td>
+                      <td className="px-6 p-4">{n.writername}</td>
                       <td className="px-6 p-4">{n.category}</td>
                       <td className="px-6 p-4">{convert(n.description || "").slice(0, 20)}</td>
                       <td className="px-4 py-2">{new Date(n.createdAt).toLocaleDateString()}</td>
