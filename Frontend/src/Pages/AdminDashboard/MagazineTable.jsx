@@ -58,7 +58,7 @@ const MagazineTable = () => {
 
                 <td className="border p-2 sm:p-3 text-center">
                   <a
-                    href={`http://localhost:5000${mag.fileUrl}`}
+                    href={mag.magazine}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block px-3 py-1 text-xs sm:text-sm bg-green-600 text-white rounded hover:bg-green-700 transition-colors"

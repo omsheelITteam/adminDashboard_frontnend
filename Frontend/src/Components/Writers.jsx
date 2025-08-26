@@ -155,7 +155,7 @@ const {backendURL}=useContext(AppContext)
       );
       setWriters(data.writers);
       setAllWriters(data.writers);
-      console.log('hello',data.writers);
+      // console.log('hello',data.writers);
       
     } catch (error) {
       console.log(error);
@@ -166,7 +166,7 @@ const {backendURL}=useContext(AppContext)
     const value = e.target.value.toLowerCase();
     const filtered = allWriters.filter(
       (writer) =>
-        writer.name.toLowerCase().includes(value) ||
+        writer.writername.toLowerCase().includes(value) ||
         writer.email.toLowerCase().includes(value) ||
         writer.category.toLowerCase().includes(value)
     );
@@ -202,7 +202,7 @@ const {backendURL}=useContext(AppContext)
               <tr>
                 <th className="px-7 py-3">No</th>
                 <th>Image</th>
-                <th className="px-4 py-3">Reporter Name</th>
+                <th className="px-4 py-3">Contributors</th>
                 <th className="px-4 py-3">Email</th>
                 <th className="px-4 py-3">Role</th>
                 <th className="px-4 py-3">Writer Bio</th>

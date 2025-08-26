@@ -281,10 +281,15 @@ const NewsContent = () => {
     const val = e.target.value;
     if (val === "") {
       setNews(allNews);
+      setPage(1);
+    setParPage(10);
     } else {
       setNews(allNews.filter(n => n.status === val));
+      setPage(1);
+    setParPage(10);
     }
     setPage(1);
+    setParPage(10);
   };
 
   // Search by title
@@ -292,6 +297,8 @@ const NewsContent = () => {
     const val = e.target.value.toLowerCase();
     setNews(allNews.filter(n => n.title.toLowerCase().includes(val)));
     setPage(1);
+    setParPage(10);
+
   };
 
   // Update status for news
