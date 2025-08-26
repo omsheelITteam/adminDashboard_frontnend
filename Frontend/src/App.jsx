@@ -98,6 +98,7 @@ import RegisterAdmin from "./Pages/Login/RegisterAdmin";
 import EmailVerification from "./Pages/Login/EmailVerification";
 import ForgotPassword from "./Pages/Login/ForgotPassword";
 import RegContributors from "./Components/RegContributors";
+import ViewProfile from "./Components/ViewProfile";
 
 // top-level admin app
 function App() {
@@ -122,6 +123,7 @@ function App() {
           <Route path="admin" element={<Admindashboard />} />
           <Route path="writers" element={<Writers />} />
           <Route path="regwriters" element={<RegContributors/>}/>
+          <Route path="view/profile/:id" element={<ViewProfile />}/>
 
           <Route path="magazine" element={<Magazine />} />
           <Route path="magazineTable" element={<MagazineTable />} />
