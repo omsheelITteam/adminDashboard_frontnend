@@ -82,6 +82,13 @@ const AdminSidebar = () => {
                 </Link>
               </li>
 
+                 <li>
+            <Link to='/dashboard/regwriters' className={navItemClass('/dashboard/regwriters')} onClick={() => setSidebarOpen(false)}>
+              <FaUsers className='text-xl' />
+              <span>Reg.Contributors</span>
+            </Link>
+          </li>
+
           <li>
             <Link to='/dashboard/writers' className={navItemClass('/dashboard/writers')} onClick={() => setSidebarOpen(false)}>
               <FaUsers className='text-xl' />

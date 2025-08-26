@@ -97,6 +97,8 @@ import UpdateProfile from "./Components/UpdateProfile";
 import RegisterAdmin from "./Pages/Login/RegisterAdmin";
 import EmailVerification from "./Pages/Login/EmailVerification";
 import ForgotPassword from "./Pages/Login/ForgotPassword";
+import RegContributors from "./Components/RegContributors";
+
 // top-level admin app
 function App() {
   return (
@@ -119,6 +121,8 @@ function App() {
           
           <Route path="admin" element={<Admindashboard />} />
           <Route path="writers" element={<Writers />} />
+          <Route path="regwriters" element={<RegContributors/>}/>
+
           <Route path="magazine" element={<Magazine />} />
           <Route path="magazineTable" element={<MagazineTable />} />
           <Route path="dailypulseTable" element={<DailyPulseTable/>} />
