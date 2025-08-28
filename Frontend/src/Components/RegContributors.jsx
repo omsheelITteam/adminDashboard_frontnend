@@ -23,8 +23,10 @@ const RegContributors = () => {
                 { withCredentials: true }
             );
             if (data.success) {
-                setAllWriters(data.writers);
-                setWriters(data.writers);
+                const reversed = data.writers.slice().reverse();
+
+                setAllWriters(reversed);
+                setWriters(reversed);
 
                 // console.log('hw');
             }
