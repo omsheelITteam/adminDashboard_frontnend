@@ -276,30 +276,50 @@ const NewsContent = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
 
-  // Filter by status
+  // // Filter by status
+  // const type_filter = (e) => {
+  //   const val = e.target.value;
+  //   if (val === "") {
+  //     setNews(allNews);
+  //     setPage(1);
+  //   setParPage(10);
+  //   } else {
+  //     setNews(allNews.filter(n => n.status === val));
+  //     setPage(1);
+  //   setParPage(10);
+  //   }
+  //   setPage(1);
+  //   setParPage(10);
+  // };
+
+  // // Search by title
+  // const search_news = (e) => {
+  //   const val = e.target.value.toLowerCase();
+  //   setNews(allNews.filter(n => n.title.toLowerCase().includes(val)));
+  //   setPage(1);
+  //   setParPage(10);
+
+  // };
+
   const type_filter = (e) => {
-    const val = e.target.value;
-    if (val === "") {
-      setNews(allNews);
-      setPage(1);
-    setParPage(10);
-    } else {
-      setNews(allNews.filter(n => n.status === val));
-      setPage(1);
-    setParPage(10);
-    }
-    setPage(1);
-    setParPage(10);
-  };
+  const val = e.target.value;
+  const filtered = val ? allNews.filter(n => n.status.toLowerCase() === val.toLowerCase()) : allNews;
+  setNews(filtered);
+  setPage(1);
+};
 
-  // Search by title
-  const search_news = (e) => {
-    const val = e.target.value.toLowerCase();
-    setNews(allNews.filter(n => n.title.toLowerCase().includes(val)));
-    setPage(1);
-    setParPage(10);
+// Search by title
+const search_news = (e) => {
+  const val = e.target.value.toLowerCase();
+  const filtered = allNews.filter(n => n.title?.toLowerCase().includes(val) ||
+  n.category?.toLowerCase().includes(val) 
+  // n.writerName?.toLowerCase().includes(val) 
 
-  };
+);
+  setNews(filtered);
+  setPage(1);
+};
+
 
   // Update status for news
   const update_status = async (status, news_id) => {

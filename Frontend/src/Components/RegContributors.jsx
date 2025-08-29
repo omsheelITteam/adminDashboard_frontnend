@@ -43,9 +43,11 @@ const RegContributors = () => {
         const value = e.target.value.toLowerCase();
         const filtered = allWriters.filter(
             (writer) =>
-                writer.name.toLowerCase().includes(value) ||
-                writer.email.toLowerCase().includes(value) ||
-                writer.category.toLowerCase().includes(value)
+                writer.name?.toLowerCase().includes(value) ||
+                writer.email?.toLowerCase().includes(value) ||
+                writer.category?.toLowerCase().includes(value) ||
+                writer.contributor?.toLowerCase().includes(value)
+
         );
         setWriters(filtered);
     };
