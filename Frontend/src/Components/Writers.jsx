@@ -166,9 +166,10 @@ const {backendURL}=useContext(AppContext)
     const value = e.target.value.toLowerCase();
     const filtered = allWriters.filter(
       (writer) =>
-        writer.writername.toLowerCase().includes(value) ||
-        writer.email.toLowerCase().includes(value) ||
-        writer.category.toLowerCase().includes(value)
+        writer.writername?.toLowerCase().includes(value) ||
+        writer.email?.toLowerCase().includes(value) ||
+        writer.category?.toLowerCase().includes(value) ||
+         writer.role?.toLowerCase().includes(value)
     );
     setWriters(filtered);
   };
